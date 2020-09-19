@@ -5,11 +5,12 @@ import com.kuang.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 
 public class UserDaoTest {
     @Test
-    public void getUserList(){
+    public  void getUserList(){
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         List<User> userList = mapper.getUserList();
@@ -18,4 +19,6 @@ public class UserDaoTest {
         }
         sqlSession.close();
     }
+
 }
+

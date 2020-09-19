@@ -201,3 +201,6 @@ Each thread should have its own instance of SqlSession. . Instances of SqlSessio
 * 连接到连接池的一个请求
 * 用完之后需要关闭，避免资源被占用
 * 这里的每一个Mapper，就代表一个具体的业务
+
+
+## 解决属性名和字段名不一致的问题

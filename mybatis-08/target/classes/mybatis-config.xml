@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--    引入外部配置文件-->
+    <properties resource="db.properties">
+        <property name="username" value="root"/>
+        <property name="password" value="diandian2710"/>
+    </properties>
+    <settings>
+        <!--    标准日志工厂实现-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+<!--       字段和属性名转换 A_COLUMN->aColumn -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+
+<!--    可以给实体类起别名-->
+    <typeAliases>
+        <package name="com.kuang.pojo"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper class="com.kuang.dao.BlogMapper"/>
+    </mappers>
+<!--    绑定接口-->
+</configuration>
