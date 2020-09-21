@@ -16,4 +16,6 @@ public interface BlogMapper {
 
     int updateBlog(Map map);
 
+    List<Blog> queryBlogForEach(Map map);
+
 }

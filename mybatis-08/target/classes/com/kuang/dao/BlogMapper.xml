@@ -5,18 +5,21 @@
 <mapper namespace="com.kuang.dao.BlogMapper">
     <insert id="addBlog" parameterType="blog" >
         insert into blog(id, title, author, create_time, views) values (#{id}, #{title}, #{author}, #{createTime}, #{views});
-
     </insert>
 
+<!--    SQL片段-->
+    <sql id="if-title-author">
+        <if test="title != null">
+            title = #{title}
+        </if>
+        <if test="author != null">
+            and author = #{author}
+        </if>
+    </sql>
     <select id="queryBlogIf" parameterType="map" resultType="Blog">
         select * from blog
         <where>
-            <if test="title != null">
-                title = #{title}
-            </if>
-            <if test="author != null">
-                and author = #{author}
-            </if>
+            <include refid="if-title-author"></include>
         </where>
     </select>
 
@@ -49,4 +52,14 @@
         </set>
         where id = #{id}
     </update>
+
+<!--    select * from blog where 1=1 and (id=1 or id=2 or id=3); SQL语句，通过foreach拼接-->
+    <select id="queryBlogForEach" parameterType="map" resultType="Blog">
+        select * from blog
+        <where>
+            <foreach collection="ids" item="id" open="and (" close=")" separator="or">
+                id = #{id}
+            </foreach>
+        </where>
+    </select>
 </mapper>

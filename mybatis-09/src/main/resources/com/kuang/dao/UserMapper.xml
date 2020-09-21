@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kuang.dao.UserMapper">
+<!--    在当前Mapper.xml中使用二级缓存-->
+<!--    <cache eviction="FIFO"-->
+<!--           flushInterval="60000"-->
+<!--           size="512"-->
+<!--           readOnly="true"/>-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+    <select id="queryUsers" resultType="User" parameterType="_int">
+        select * from user where id = #{id};
+    </select>
+
+    <update id="updateUser" parameterType="map">
+        update user
+        <set>
+            <if test="name !=null">name = #{name},</if>
+            <if test="pwd != null">pwd = #{pwd}</if>
+        </set>
+        where id = #{id};
+    </update>
+</mapper>
